@@ -5,6 +5,8 @@
 #include <QMessageBox>
 #include <QPainter>
 #include <QTextCharFormat>
+#include <QDebug>
+#include <QTextCodec>
 
 #include "chinesecharacterobject.h"
 #include "svgobject.h"
@@ -17,6 +19,13 @@ Widget::Widget(QWidget *parent) :
 
     setupTextObject();
     setupSvgObject();
+
+    QString str = QTextCodec::codecForLocale()->name();
+
+    qDebug()<<str;
+//    ui->lineEdit->setText("我");  // 会乱码  //源文件使用的utf8 编码 而 转换的时候使用的 system 转的 所以乱码
+
+//    ui->lineEdit->setText(QString::fromLocal8Bit("我")); // 不会乱码
 }
 
 Widget::~Widget()
@@ -90,6 +99,11 @@ void Widget::insertTextObject()
 void Widget::on_Svg_clicked()
 {
     insertSvgObject();
+
+    //=========================
+    QString str = ui->lineEdit->text();
+    qDebug()<<str;
+    //========================
 }
 
 void Widget::on_Text_clicked()
