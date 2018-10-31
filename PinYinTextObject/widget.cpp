@@ -1,9 +1,10 @@
-#include "widget.h"
+﻿#include "widget.h"
 #include "ui_widget.h"
 
 #include <QSvgRenderer>
 #include <QMessageBox>
 #include <QPainter>
+#include <QTextCharFormat>
 
 #include "chinesecharacterobject.h"
 #include "svgobject.h"
@@ -39,7 +40,7 @@ void Widget::setupTextObject()
 
 void Widget::insertSvgObject()
 {
-    QString fileName = ":/heart.svg";
+    QString fileName = ":/leaf.svg";
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         QMessageBox::warning(this, tr("Error Opening File"),
@@ -65,7 +66,25 @@ void Widget::insertSvgObject()
 
 void Widget::insertTextObject()
 {
+    QTextCharFormat chineseCharFormat;
+    chineseCharFormat.setObjectType(ChineseCharFormat);
 
+    QVariantMap map;
+    QString key_t = "ni";
+    QString value_t = QString::fromLocal8Bit("你");
+    map.insert(key_t,value_t);
+
+    QVariantMap map1;
+    QString key_t1 = "hao";
+    QString value_t1 = QString::fromLocal8Bit("好");
+    map1.insert(key_t1,value_t1);
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+
+    chineseCharFormat.setProperty(CharacterData, map);
+    cursor.insertText(QString(QChar::ObjectReplacementCharacter), chineseCharFormat);
+    chineseCharFormat.setProperty(CharacterData, map1);
+    cursor.insertText(QString(QChar::ObjectReplacementCharacter), chineseCharFormat);
 }
 
 void Widget::on_Svg_clicked()
