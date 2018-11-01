@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>heart.svg</file>
         <file>leaf.svg</file>
+        <file>word.pyd</file>
     </qresource>
 </RCC>

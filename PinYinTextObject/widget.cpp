@@ -8,6 +8,9 @@
 #include <QDebug>
 #include <QTextCodec>
 #include <QFont>
+#include <QTextDocumentFragment>
+#include <QTextFrame>
+#include <QTextBlock>
 
 #include "chinesecharacterobject.h"
 #include "svgobject.h"
@@ -21,13 +24,12 @@ Widget::Widget(QWidget *parent) :
     setupTextObject();
     setupSvgObject();
 
-    QString str = QTextCodec::codecForLocale()->name();
-    qDebug()<<str;
+//    ui->textEdit->setReadOnly(true);
+    ui->textEdit->setLineWrapMode(QTextEdit::NoWrap);
 
-    ui->textEdit->setReadOnly(true);
-//    ui->lineEdit->setText("我");  // 会乱码  //源文件使用的utf8 编码 而 转换的时候使用的 system 转的 所以乱码
+    ui->textEdit->setPlaceholderText("Please input the Chinese Characters..........");
 
-//    ui->lineEdit->setText(QString::fromLocal8Bit("我")); // 不会乱码
+    ui->textEdit->document()->setDefaultFont(QFont("KaiTi",40));
 }
 
 Widget::~Widget()
@@ -77,31 +79,23 @@ void Widget::insertSvgObject()
 
 void Widget::insertTextObject()
 {
+    QString key_t = QString::fromLocal8Bit("nǐ");
+    QString value_t = QString::fromLocal8Bit("你");
+    QString key_t1 = QString::fromLocal8Bit("hǎo");
+    QString value_t1 = QString::fromLocal8Bit("好");
+
+    insertChineseChar(key_t,value_t);
+    insertChineseChar(key_t1,value_t1);
+}
+
+void Widget::insertChineseChar(QString pinyin, QString hanzi)
+{
+    QVariantMap map;
+    map.insert(pinyin,hanzi);
     QTextCharFormat chineseCharFormat;
     chineseCharFormat.setObjectType(ChineseCharFormat);
-
-    QFont fontChar;
-    fontChar.setPointSizeF(20);
-    fontChar.setFamily("KaiTi");
-//    fontChar.setFamily("STLiti");
-    chineseCharFormat.setFont(fontChar);
-    chineseCharFormat.setForeground(QBrush(Qt::red));
-
-    QVariantMap map;
-    QString key_t = "ni";
-    QString value_t = QString::fromLocal8Bit("你");
-    map.insert(key_t,value_t);
-
-    QVariantMap map1;
-    QString key_t1 = "hao";
-    QString value_t1 = QString::fromLocal8Bit("好");
-    map1.insert(key_t1,value_t1);
-
     QTextCursor cursor = ui->textEdit->textCursor();
-
     chineseCharFormat.setProperty(CharacterData, map);
-    cursor.insertText(QString(QChar::ObjectReplacementCharacter), chineseCharFormat);
-    chineseCharFormat.setProperty(CharacterData, map1);
     cursor.insertText(QString(QChar::ObjectReplacementCharacter), chineseCharFormat);
 }
 
@@ -118,4 +112,38 @@ void Widget::on_Svg_clicked()
 void Widget::on_Text_clicked()
 {
     insertTextObject();
+}
+
+void Widget::on_test_clicked()
+{
+    QTextCursor cursor = ui->textEdit->textCursor();
+    if(cursor.hasSelection())
+    {
+        qDebug()<<"selected text object";
+//        qDebug()<<cursor.selectedText();
+//        qDebug()<<cursor.selectedText().size();
+//        qDebug()<<cursor.selection().toPlainText();
+
+        int current = cursor.position();
+        int start = cursor.selectionStart();
+        int end = cursor.selectionEnd();
+
+
+        for(int i = start+1; i <= end ; i++)
+        {
+            cursor.setPosition(i);
+            auto charFormat = cursor.charFormat();
+            QVariantMap map = charFormat.property(Widget::CharacterData).toMap();
+            qDebug()<<map.firstKey();
+            qDebug()<<map.first().toString();
+        }
+
+        cursor.setPosition(start);
+        cursor.setPosition(end,QTextCursor::KeepAnchor);
+
+        //待定
+        ui->textEdit->setTextCursor(cursor);
+        ui->textEdit->setFocus();
+        qDebug()<<"end";
+    }
 }

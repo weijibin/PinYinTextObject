@@ -13,46 +13,57 @@
 const int margin = 3;
 ChineseCharacterObject::ChineseCharacterObject()
 {
-    m_pinyin.setPointSizeF(15);
-    m_pinyin.setFamily("Roman");
+    m_pinyin.setPointSizeF(20);
+    m_pinyin.setFamily("Times New Roman");
 
-    m_hanzi.setPointSizeF(20);
+    m_hanzi.setPointSizeF(50);
     m_hanzi.setFamily("KaiTi");
 
-//    m_metricsPY
+    m_metricsPY = new QFontMetricsF(m_pinyin);
+    m_metricsHZ = new QFontMetricsF(m_hanzi);
+
+    m_fontColor.setNamedColor("#aa00ff");
+}
+
+ChineseCharacterObject::~ChineseCharacterObject()
+{
+    delete m_metricsPY;
+    delete m_metricsHZ;
 }
 
 QSizeF ChineseCharacterObject::intrinsicSize(QTextDocument *doc, int posInDocument, const QTextFormat &format)
 {
-    QFont f = format.toCharFormat().font();
     QVariantMap map = qvariant_cast<QVariantMap>(format.property(Widget::CharacterData));
-    QFontMetricsF metrics(f);
 
-    qreal t_w = metrics.width(map.firstKey());
-    qreal b_w = metrics.width(map.first().toString());
-    qreal h = metrics.height();
+    qreal t_w = m_metricsPY->width(map.firstKey());
+    qreal b_w = m_metricsHZ->width(map.first().toString());
+    qreal t_h = m_metricsPY->height();
+    qreal b_h = m_metricsHZ->height();
 
-    QSizeF size(qMax(t_w,b_w)+2*margin,2*h+2*margin);
+    QSizeF size(qMax(t_w,b_w)+2*margin,t_h+b_h+2*margin);
     return size;
 }
 
 void ChineseCharacterObject::drawObject(QPainter *painter, const QRectF &rect, QTextDocument *doc, int posInDocument, const QTextFormat &format)
 {
-    QFont f = format.toCharFormat().font();
     QVariantMap map = qvariant_cast<QVariantMap>(format.property(Widget::CharacterData));
-    QFontMetricsF metrics(f);
 
-    qreal t_w = metrics.width(map.firstKey());
-    qreal b_w = metrics.width(map.first().toString());
-    qreal h = metrics.height();
+    qreal t_w = m_metricsPY->width(map.firstKey());
+    qreal b_w = m_metricsHZ->width(map.first().toString());
+    qreal t_h = m_metricsPY->height();
+    qreal b_h = m_metricsHZ->height();
 
     qreal w = qMax(t_w,b_w);
 
     painter->save();
-    painter->setFont(f);
-    painter->setBrush(format.foreground());
+    painter->setPen(m_fontColor);
     painter->setRenderHint(QPainter::TextAntialiasing);
-    painter->drawText(QRectF(rect.topLeft()+QPointF(margin+((w-t_w)/2),margin),QSizeF(t_w,h)),map.firstKey());
-    painter->drawText(QRectF(rect.topLeft()+QPointF(margin+((w-b_w)/2),margin+h),QSizeF(b_w,h)),map.first().toString());
+
+    painter->setFont(m_pinyin);
+    painter->drawText(QRectF(rect.topLeft()+QPointF(margin+((w-t_w)/2),margin),QSizeF(t_w,t_h)),map.firstKey());
+
+    painter->setFont(m_hanzi);
+    painter->drawText(QRectF(rect.topLeft()+QPointF(margin+((w-b_w)/2),margin+t_h),QSizeF(b_w,b_h)),map.first().toString());
+
     painter->restore();
 }

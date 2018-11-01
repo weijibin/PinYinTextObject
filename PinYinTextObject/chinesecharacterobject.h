@@ -4,6 +4,7 @@
 #include <QTextObjectInterface>
 #include <QFont>
 #include <QFontMetricsF>
+#include <QColor>
 
 
 QT_BEGIN_NAMESPACE
@@ -20,6 +21,7 @@ class ChineseCharacterObject : public QObject , public QTextObjectInterface
     Q_INTERFACES(QTextObjectInterface)
 public:
     ChineseCharacterObject();
+    virtual ~ChineseCharacterObject();
 
     virtual QSizeF intrinsicSize(QTextDocument *doc, int posInDocument, const QTextFormat &format) override;
     virtual void drawObject(QPainter *painter, const QRectF &rect, QTextDocument *doc,
@@ -27,16 +29,19 @@ public:
 
 private:
 
-    QFontMetricsF m_metricsPY;
-    QFontMetricsF m_metricsHZ;
+    QFontMetricsF *m_metricsPY = nullptr;
+    QFontMetricsF *m_metricsHZ = nullptr;
 
     QFont m_pinyin;
     QFont m_hanzi;
+
+    QColor m_fontColor;
 
     qreal m_widthPY;
     qreal m_heightPY;
     qreal m_widthHZ;
     qreal m_heightHZ;
+
 };
 
 #endif // CHINESECHARACTEROBJECT_H

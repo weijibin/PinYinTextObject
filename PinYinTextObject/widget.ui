@@ -23,6 +23,13 @@
       <widget class="QLineEdit" name="lineEdit"/>
      </item>
      <item>
+      <widget class="QPushButton" name="test">
+       <property name="text">
+        <string>test</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="Text">
        <property name="text">
         <string>Text</string>

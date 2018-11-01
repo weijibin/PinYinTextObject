@@ -22,6 +22,8 @@ public:
 
 private:
     void insertTextObject();
+    void insertChineseChar(QString pinyin,QString hanzi);
+
     void insertSvgObject();
 
     void setupTextObject();
@@ -30,6 +32,8 @@ private:
 private slots:
     void on_Svg_clicked();
     void on_Text_clicked();
+
+    void on_test_clicked();
 
 private:
     Ui::Widget *ui;
