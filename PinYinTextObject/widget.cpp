@@ -7,6 +7,7 @@
 #include <QTextCharFormat>
 #include <QDebug>
 #include <QTextCodec>
+#include <QFont>
 
 #include "chinesecharacterobject.h"
 #include "svgobject.h"
@@ -21,8 +22,9 @@ Widget::Widget(QWidget *parent) :
     setupSvgObject();
 
     QString str = QTextCodec::codecForLocale()->name();
-
     qDebug()<<str;
+
+    ui->textEdit->setReadOnly(true);
 //    ui->lineEdit->setText("我");  // 会乱码  //源文件使用的utf8 编码 而 转换的时候使用的 system 转的 所以乱码
 
 //    ui->lineEdit->setText(QString::fromLocal8Bit("我")); // 不会乱码
@@ -78,6 +80,13 @@ void Widget::insertTextObject()
     QTextCharFormat chineseCharFormat;
     chineseCharFormat.setObjectType(ChineseCharFormat);
 
+    QFont fontChar;
+    fontChar.setPointSizeF(20);
+    fontChar.setFamily("KaiTi");
+//    fontChar.setFamily("STLiti");
+    chineseCharFormat.setFont(fontChar);
+    chineseCharFormat.setForeground(QBrush(Qt::red));
+
     QVariantMap map;
     QString key_t = "ni";
     QString value_t = QString::fromLocal8Bit("你");
@@ -101,8 +110,8 @@ void Widget::on_Svg_clicked()
     insertSvgObject();
 
     //=========================
-    QString str = ui->lineEdit->text();
-    qDebug()<<str;
+//    QString str = ui->lineEdit->text();
+//    qDebug()<<str;
     //========================
 }
 
