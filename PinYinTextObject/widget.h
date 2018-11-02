@@ -25,7 +25,9 @@ private:
     static void readPinYinData();
 
     void insertTextObject();
-    void insertChineseChar(QString pinyin,QString hanzi);
+    void insertChineseChar(const QString &pinyin,const QString &hanzi);
+
+    void insertEnterChar(const QString & key, const QString &value);
 
     void insertSvgObject();
 
@@ -41,6 +43,8 @@ private slots:
 private:
 
     static QMap<QString,QStringList> m_PinYinAll;
+
+    QList<QPair<QString,QString>> m_HZPY;
 
     Ui::Widget *ui;
 };

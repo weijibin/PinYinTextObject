@@ -13,10 +13,10 @@
 const int margin = 3;
 ChineseCharacterObject::ChineseCharacterObject()
 {
-    m_pinyin.setPointSizeF(20);
+    m_pinyin.setPointSizeF(15);
     m_pinyin.setFamily("Times New Roman");
 
-    m_hanzi.setPointSizeF(50);
+    m_hanzi.setPointSizeF(20);
     m_hanzi.setFamily("KaiTi");
 
     m_metricsPY = new QFontMetricsF(m_pinyin);

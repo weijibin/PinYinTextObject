@@ -16,6 +16,7 @@
 #include <QStringList>
 #include <QtConcurrent>
 #include <QFuture>
+#include <QTime>
 
 #include "chinesecharacterobject.h"
 #include "svgobject.h"
@@ -28,19 +29,21 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+//    QTime t;
+//    t.start();
 //    readPinYinData();
+//    qDebug()<<"Spend Time:::"<<t.elapsed(); // maximum time 2 second
 
-//    QtConcurrent::run(this,&Widget::readPinYinData); // 一般成员函数
-    QtConcurrent::run(&Widget::readPinYinData); // 静态成员函数
+    QtConcurrent::run(&Widget::readPinYinData);
 
     setupTextObject();
     setupSvgObject();
 
     ui->textEdit_Source->setLineWrapMode(QTextEdit::NoWrap);
     ui->textEdit_Source->setPlaceholderText("Please input the Chinese Characters..........");
-    ui->textEdit_Source->document()->setDefaultFont(QFont("KaiTi",40));
+    ui->textEdit_Source->document()->setDefaultFont(QFont("KaiTi",15));
 
-    ui->textEdit->setReadOnly(true);
+//    ui->textEdit->setReadOnly(true);
     ui->textEdit->setLineWrapMode(QTextEdit::NoWrap);
 }
 
@@ -115,7 +118,7 @@ void Widget::insertTextObject()
     insertChineseChar(key_t1,value_t1);
 }
 
-void Widget::insertChineseChar(QString pinyin, QString hanzi)
+void Widget::insertChineseChar(const QString &pinyin, const QString &hanzi)
 {
     QVariantMap map;
     map.insert(pinyin,hanzi);
@@ -133,21 +136,43 @@ void Widget::on_Svg_clicked()
 
 void Widget::on_Text_clicked()
 {
-//    insertTextObject();
+    m_HZPY.clear();
 
     ui->textEdit->clear();
     QString str = ui->textEdit_Source->toPlainText();
     int count = str.count();
+
+    QString key_t;
+    QString value_t ;
+
     for(int i = 0; i< count; i++)
     {
-        QString ch = str.at(i);
-        if(m_PinYinAll.contains(ch))
+        key_t = "";
+        value_t = str.at(i);
+        if(m_PinYinAll.contains(value_t))
+        {             
+            key_t = m_PinYinAll.value(value_t).first();
+        }
+        if(value_t == "\n")
         {
-            QString key_t = m_PinYinAll.value(ch).first();
-            QString value_t = ch;
+            insertEnterChar(key_t,value_t);
+        }
+        else
+        {
             insertChineseChar(key_t,value_t);
         }
+        m_HZPY.append(QPair<QString,QString>(key_t,value_t));
     }
+}
+
+void Widget::insertEnterChar(const QString & key, const QString &value)
+{
+    QVariantMap map;
+    map.insert(key,value);
+    QTextCharFormat format;
+    format.setProperty(CharacterData, map);
+    QTextCursor cur = ui->textEdit->textCursor();
+    cur.insertText(value, format);
 }
 
 void Widget::on_test_clicked()
@@ -156,26 +181,15 @@ void Widget::on_test_clicked()
     if(cursor.hasSelection())
     {
         qDebug()<<"selected text object";
-
-        int current = cursor.position();
         int start = cursor.selectionStart();
         int end = cursor.selectionEnd();
-
-        for(int i = start+1; i <= end ; i++)
+        qDebug()<<"start::"<<start<<"end::"<<end;
+        for(int i = start; i < end ; i++)
         {
-            cursor.setPosition(i);
-            auto charFormat = cursor.charFormat();
-            QVariantMap map = charFormat.property(Widget::CharacterData).toMap();
-            qDebug()<<map.firstKey();
-            qDebug()<<map.first().toString();
+            QString str = m_HZPY.at(i).first;
+            QString str1 = m_HZPY.at(i).second;
+            qDebug()<<"str::"<<str<<"===="<<str1;
         }
-
-        cursor.setPosition(start);
-        cursor.setPosition(end,QTextCursor::KeepAnchor);
-
-        //待定
-        ui->textEdit->setTextCursor(cursor);
-        ui->textEdit->setFocus();
         qDebug()<<"end";
     }
 }
