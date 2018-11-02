@@ -10,7 +10,7 @@
 #include <QColor>
 #include <QBrush>
 
-const int margin = 3;
+const int margin = 1;
 ChineseCharacterObject::ChineseCharacterObject()
 {
     m_pinyin.setPointSizeF(15);
@@ -22,7 +22,7 @@ ChineseCharacterObject::ChineseCharacterObject()
     m_metricsPY = new QFontMetricsF(m_pinyin);
     m_metricsHZ = new QFontMetricsF(m_hanzi);
 
-    m_fontColor.setNamedColor("#aa00ff");
+//    m_fontColor.setNamedColor("#aa00ff");
 
     m_fixedWidth = m_metricsPY->width("chong");
 }
@@ -65,7 +65,7 @@ void ChineseCharacterObject::drawObject(QPainter *painter, const QRectF &rect, Q
     qreal w = qMax(t_w,temp);
 
     painter->save();
-    painter->setPen(m_fontColor);
+//    painter->setPen(m_fontColor);
     painter->setRenderHint(QPainter::TextAntialiasing);
 
     painter->setFont(m_pinyin);

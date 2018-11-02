@@ -137,14 +137,11 @@ void Widget::on_Svg_clicked()
 void Widget::on_Text_clicked()
 {
     m_HZPY.clear();
-
     ui->textEdit->clear();
     QString str = ui->textEdit_Source->toPlainText();
     int count = str.count();
-
     QString key_t;
     QString value_t ;
-
     for(int i = 0; i< count; i++)
     {
         key_t = "";
@@ -155,7 +152,7 @@ void Widget::on_Text_clicked()
         }
         if(value_t == "\n")
         {
-            insertEnterChar(key_t,value_t);
+            insertSystemChar(key_t,value_t);
         }
         else
         {
@@ -165,7 +162,7 @@ void Widget::on_Text_clicked()
     }
 }
 
-void Widget::insertEnterChar(const QString & key, const QString &value)
+void Widget::insertSystemChar(const QString & key, const QString &value)
 {
     QVariantMap map;
     map.insert(key,value);
@@ -175,20 +172,32 @@ void Widget::insertEnterChar(const QString & key, const QString &value)
     cur.insertText(value, format);
 }
 
-void Widget::on_test_clicked()
+void Widget::changeTextColor(QString color)
 {
     QTextCursor cursor = ui->textEdit->textCursor();
-    if(cursor.hasSelection())
-    {
-        int start = cursor.selectionStart();
-        int end = cursor.selectionEnd();
-        qDebug()<<"start::"<<start<<"end::"<<end;
-        for(int i = start; i < end ; i++)
-        {
-            QString str = m_HZPY.at(i).first;
-            QString str1 = m_HZPY.at(i).second;
-            qDebug()<<"str::"<<str<<"===="<<str1;
-        }
-        qDebug()<<"end";
-    }
+    cursor.select(QTextCursor::Document);
+    QTextCharFormat tcf;
+    tcf.setForeground(QColor(color));
+    cursor.mergeCharFormat(tcf);
+}
+
+void Widget::on_test_clicked()
+{
+
+    changeTextColor("#aa00ff");
+
+//    QTextCursor cursor = ui->textEdit->textCursor();
+//    if(cursor.hasSelection())
+//    {
+//        int start = cursor.selectionStart();
+//        int end = cursor.selectionEnd();
+//        qDebug()<<"start::"<<start<<"end::"<<end;
+//        for(int i = start; i < end ; i++)
+//        {
+//            QString str = m_HZPY.at(i).first;
+//            QString str1 = m_HZPY.at(i).second;
+//            qDebug()<<"str::"<<str<<"===="<<str1;
+//        }
+//        qDebug()<<"end";
+//    }
 }

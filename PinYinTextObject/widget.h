@@ -21,20 +21,21 @@ public:
     ~Widget();
 
     static QMap<QString,QStringList> m_PinYinAll;
+    static void readPinYinData();
 
 private:
 
-    static void readPinYinData();
+    void setupTextObject();
+    void changeTextColor(QString color);
 
-    void insertTextObject();
     void insertChineseChar(const QString &pinyin,const QString &hanzi);
+    void insertSystemChar(const QString & key, const QString &value);
 
-    void insertEnterChar(const QString & key, const QString &value);
 
+    void setupSvgObject();
     void insertSvgObject();
 
-    void setupTextObject();
-    void setupSvgObject();
+    void insertTextObject();
 
 private slots:
     void on_Svg_clicked();
