@@ -14,6 +14,8 @@
 #include <QFile>
 #include <QMap>
 #include <QStringList>
+#include <QtConcurrent>
+#include <QFuture>
 
 #include "chinesecharacterobject.h"
 #include "svgobject.h"
@@ -26,7 +28,10 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    readPinYinData();
+//    readPinYinData();
+
+//    QtConcurrent::run(this,&Widget::readPinYinData); // 一般成员函数
+    QtConcurrent::run(&Widget::readPinYinData); // 静态成员函数
 
     setupTextObject();
     setupSvgObject();

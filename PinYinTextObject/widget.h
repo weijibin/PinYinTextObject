@@ -22,7 +22,7 @@ public:
 
 private:
 
-    void readPinYinData();
+    static void readPinYinData();
 
     void insertTextObject();
     void insertChineseChar(QString pinyin,QString hanzi);
