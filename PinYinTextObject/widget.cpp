@@ -11,9 +11,14 @@
 #include <QTextDocumentFragment>
 #include <QTextFrame>
 #include <QTextBlock>
+#include <QFile>
+#include <QMap>
+#include <QStringList>
 
 #include "chinesecharacterobject.h"
 #include "svgobject.h"
+
+QMap<QString,QStringList> Widget::m_PinYinAll = QMap<QString,QStringList>();
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -21,20 +26,37 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    readPinYinData();
+
     setupTextObject();
     setupSvgObject();
 
-//    ui->textEdit->setReadOnly(true);
+    ui->textEdit_Source->setLineWrapMode(QTextEdit::NoWrap);
+    ui->textEdit_Source->setPlaceholderText("Please input the Chinese Characters..........");
+    ui->textEdit_Source->document()->setDefaultFont(QFont("KaiTi",40));
+
+    ui->textEdit->setReadOnly(true);
     ui->textEdit->setLineWrapMode(QTextEdit::NoWrap);
-
-    ui->textEdit->setPlaceholderText("Please input the Chinese Characters..........");
-
-    ui->textEdit->document()->setDefaultFont(QFont("KaiTi",40));
 }
 
 Widget::~Widget()
 {
     delete ui;
+}
+
+void Widget::readPinYinData()
+{
+    QFile file(":/word.pyd");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    m_PinYinAll.clear();
+
+    while (!file.atEnd()) {
+        QString line = QString::fromUtf8(file.readLine()).trimmed();
+        QStringList lst = line.split("|");
+        QStringList lstYin = lst.last().split(",");
+        m_PinYinAll.insert(lst.first(),lstYin);
+    }
 }
 
 void Widget::setupSvgObject()
@@ -102,16 +124,25 @@ void Widget::insertChineseChar(QString pinyin, QString hanzi)
 void Widget::on_Svg_clicked()
 {
     insertSvgObject();
-
-    //=========================
-//    QString str = ui->lineEdit->text();
-//    qDebug()<<str;
-    //========================
 }
 
 void Widget::on_Text_clicked()
 {
-    insertTextObject();
+//    insertTextObject();
+
+    ui->textEdit->clear();
+    QString str = ui->textEdit_Source->toPlainText();
+    int count = str.count();
+    for(int i = 0; i< count; i++)
+    {
+        QString ch = str.at(i);
+        if(m_PinYinAll.contains(ch))
+        {
+            QString key_t = m_PinYinAll.value(ch).first();
+            QString value_t = ch;
+            insertChineseChar(key_t,value_t);
+        }
+    }
 }
 
 void Widget::on_test_clicked()
@@ -120,14 +151,10 @@ void Widget::on_test_clicked()
     if(cursor.hasSelection())
     {
         qDebug()<<"selected text object";
-//        qDebug()<<cursor.selectedText();
-//        qDebug()<<cursor.selectedText().size();
-//        qDebug()<<cursor.selection().toPlainText();
 
         int current = cursor.position();
         int start = cursor.selectionStart();
         int end = cursor.selectionEnd();
-
 
         for(int i = start+1; i <= end ; i++)
         {

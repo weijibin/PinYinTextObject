@@ -21,6 +21,9 @@ public:
     ~Widget();
 
 private:
+
+    void readPinYinData();
+
     void insertTextObject();
     void insertChineseChar(QString pinyin,QString hanzi);
 
@@ -36,6 +39,9 @@ private slots:
     void on_test_clicked();
 
 private:
+
+    static QMap<QString,QStringList> m_PinYinAll;
+
     Ui::Widget *ui;
 };
 
