@@ -20,6 +20,8 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
 
+    static QMap<QString,QStringList> m_PinYinAll;
+
 private:
 
     static void readPinYinData();
@@ -41,8 +43,6 @@ private slots:
     void on_test_clicked();
 
 private:
-
-    static QMap<QString,QStringList> m_PinYinAll;
 
     QList<QPair<QString,QString>> m_HZPY;
 

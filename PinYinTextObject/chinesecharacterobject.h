@@ -42,6 +42,7 @@ private:
     qreal m_widthHZ;
     qreal m_heightHZ;
 
+    qreal m_fixedWidth;
 };
 
 #endif // CHINESECHARACTEROBJECT_H

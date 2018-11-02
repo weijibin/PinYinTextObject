@@ -180,7 +180,6 @@ void Widget::on_test_clicked()
     QTextCursor cursor = ui->textEdit->textCursor();
     if(cursor.hasSelection())
     {
-        qDebug()<<"selected text object";
         int start = cursor.selectionStart();
         int end = cursor.selectionEnd();
         qDebug()<<"start::"<<start<<"end::"<<end;

@@ -23,6 +23,8 @@ ChineseCharacterObject::ChineseCharacterObject()
     m_metricsHZ = new QFontMetricsF(m_hanzi);
 
     m_fontColor.setNamedColor("#aa00ff");
+
+    m_fixedWidth = m_metricsPY->width("chong");
 }
 
 ChineseCharacterObject::~ChineseCharacterObject()
@@ -37,6 +39,10 @@ QSizeF ChineseCharacterObject::intrinsicSize(QTextDocument *doc, int posInDocume
 
     qreal t_w = m_metricsPY->width(map.firstKey());
     qreal b_w = m_metricsHZ->width(map.first().toString());
+
+    if(Widget::m_PinYinAll.contains(map.first().toString()))
+        b_w = m_fixedWidth;
+
     qreal t_h = m_metricsPY->height();
     qreal b_h = m_metricsHZ->height();
 
@@ -53,7 +59,10 @@ void ChineseCharacterObject::drawObject(QPainter *painter, const QRectF &rect, Q
     qreal t_h = m_metricsPY->height();
     qreal b_h = m_metricsHZ->height();
 
-    qreal w = qMax(t_w,b_w);
+    qreal temp = b_w;
+    if(Widget::m_PinYinAll.contains(map.first().toString()))
+        temp = m_fixedWidth;
+    qreal w = qMax(t_w,temp);
 
     painter->save();
     painter->setPen(m_fontColor);
