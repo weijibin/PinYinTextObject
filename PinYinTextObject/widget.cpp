@@ -20,6 +20,7 @@
 
 #include "chinesecharacterobject.h"
 #include "svgobject.h"
+#include "UIDialog/phoneticdialog.h"
 
 QMap<QString,QStringList> Widget::m_PinYinAll = QMap<QString,QStringList>();
 
@@ -184,7 +185,10 @@ void Widget::changeTextColor(QString color)
 void Widget::on_test_clicked()
 {
 
-    changeTextColor("#aa00ff");
+    PhoneticDialog dlg;
+    dlg.exec();
+
+//    changeTextColor("#aa00ff");
 
 //    QTextCursor cursor = ui->textEdit->textCursor();
 //    if(cursor.hasSelection())

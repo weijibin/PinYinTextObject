@@ -19,7 +19,7 @@ public:
 
     explicit Widget(QWidget *parent = 0);
     ~Widget();
-
+    static QMap<QString,QStringList> getPinYinAll() {return m_PinYinAll;}
     static QMap<QString,QStringList> m_PinYinAll;
     static void readPinYinData();
 

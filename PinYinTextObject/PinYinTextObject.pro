@@ -8,6 +8,8 @@ QT       += core gui svg concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += c++11
+
 TARGET = PinYinTextObject
 TEMPLATE = app
 
@@ -27,12 +29,24 @@ SOURCES += \
         main.cpp \
         widget.cpp \
     chinesecharacterobject.cpp \
-    svgobject.cpp
+    svgobject.cpp \
+    UIDialog/phoneticdialog.cpp \
+    UIDialog/phoneticpreview.cpp \
+    UIDialog/phoneticedit.cpp \
+    UIDialog/phonetictitle.cpp \
+    UIDialog/PhoneticEdit/chinesecharacterobject.cpp \
+    UIDialog/PhoneticEdit/phonetictextedit.cpp
 
 HEADERS += \
         widget.h \
     chinesecharacterobject.h \
-    svgobject.h
+    svgobject.h \
+    UIDialog/phoneticdialog.h \
+    UIDialog/phoneticpreview.h \
+    UIDialog/phoneticedit.h \
+    UIDialog/phonetictitle.h \
+    UIDialog/PhoneticEdit/chinesecharacterobject.h \
+    UIDialog/PhoneticEdit/phonetictextedit.h
 
 FORMS += \
         widget.ui
