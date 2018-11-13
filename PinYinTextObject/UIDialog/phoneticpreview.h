@@ -3,6 +3,11 @@
 
 #include <QWidget>
 
+class QPushButton;
+class QTextEdit;
+class PhoneticTextEdit;
+class QLabel;
+
 class PhoneticPreview : public QWidget
 {
     Q_OBJECT
@@ -12,6 +17,19 @@ public:
 signals:
 
 public slots:
+
+private:
+    void initUI();
+
+private:
+    QPushButton * m_clear = nullptr;
+    QPushButton * m_phonetic = nullptr;
+    QPushButton * m_edit = nullptr;
+    QPushButton * m_insert = nullptr;
+
+    QTextEdit * m_textEdit = nullptr;
+    PhoneticTextEdit * m_preview = nullptr;
+
 };
 
 #endif // PHONETICPREVIEW_H
