@@ -1,6 +1,7 @@
 #include "phonetictextedit.h"
 #include "chinesecharacterobject.h"
 #include "../../widget.h"
+#include <QDebug>
 
 PhoneticTextEdit::PhoneticTextEdit()
 {
@@ -54,6 +55,32 @@ void PhoneticTextEdit::changeTextColor(QString color)
 const QList<QPair<QString, QString> > &PhoneticTextEdit::getHZPY() const
 {
     return m_HZPY;
+}
+
+QList<int> PhoneticTextEdit::getSelectedHZPY() const
+{
+    QList<int> lst;
+//    QList<QPair<QString,QString>> pinyin;
+    QTextCursor cursor = this->textCursor();
+    if(cursor.hasSelection())
+    {
+        int start = cursor.selectionStart();
+        int end = cursor.selectionEnd();
+//        qDebug()<<"start::"<<start<<"end::"<<end;
+        for(int i = start; i < end ; i++)
+        {
+            QString str = m_HZPY.at(i).first;
+            QString str1 = m_HZPY.at(i).second;
+            if(Widget::getPinYinAll().keys().contains(str1))
+            {
+//                pinyin.append(QPair<QString,QString>(str,str1));
+                lst.append(i);
+                qDebug()<<"i::"<<"str::"<<str<<"===="<<str1;
+            }
+        }
+//       qDebug()<<"end";
+   }
+    return lst;
 }
 
 void PhoneticTextEdit::setChineseString(QString str)

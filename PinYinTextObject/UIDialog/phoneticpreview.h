@@ -13,6 +13,9 @@ class PhoneticPreview : public QWidget
     Q_OBJECT
 public:
     explicit PhoneticPreview(QWidget *parent = nullptr);
+    void setChineseChars(const QList<QPair<QString, QString> > &hzpy);
+
+    void setCurrentHZPY(const QList<QPair<QString, QString> > &hzpy);
 
 signals:
     void sigInsert(const QList<QPair<QString,QString>> & hzpy);
@@ -24,6 +27,9 @@ private slots:
 private:
     void initUI();
     void connectSignals();
+    QString getStringFromHZPY(const QList<QPair<QString,QString>> & hzpy);
+
+    void updateBtnState();
 
 private:
     QPushButton * m_clear = nullptr;

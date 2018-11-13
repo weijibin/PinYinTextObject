@@ -10,6 +10,7 @@ public:
     void setChinesePhoneticNotation(const QList<QPair<QString,QString>> &hzpy);
     void changeTextColor(QString color);
     const QList<QPair<QString,QString>>& getHZPY() const;
+    QList<int> getSelectedHZPY() const;
 
 private:
     void setupTextObject();

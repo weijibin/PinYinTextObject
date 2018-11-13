@@ -63,3 +63,16 @@ void Widget::on_test_clicked()
     });
     dlg.exec();
 }
+
+void Widget::on_edit_clicked()
+{
+    if(m_phoneticEdit->getHZPY().count() > 0)
+    {
+        PhoneticDialog dlg;
+        dlg.setCurrentHZPY(m_phoneticEdit->getHZPY());
+        connect(&dlg,&PhoneticDialog::sigInsert,[=](const QList<QPair<QString,QString>> & hzpy){
+            m_phoneticEdit->setChinesePhoneticNotation(hzpy);
+        });
+        dlg.exec();
+    }
+}

@@ -12,12 +12,19 @@ class PhoneticEdit : public QWidget
 public:
     explicit PhoneticEdit(QWidget *parent = nullptr);
 
+    void setChineseChars(const QList<QPair<QString, QString> > &hzpy);
+
 signals:
+    void sigSave(const QList<QPair<QString, QString> > &hzpy);
+    void sigCancel();
 
 public slots:
 
 private:
     void initUI();
+    void connectSignals();
+
+    void updateBtnState();
 
 private:
     QPushButton * m_change = nullptr;

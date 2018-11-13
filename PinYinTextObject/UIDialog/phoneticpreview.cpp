@@ -12,6 +12,39 @@ PhoneticPreview::PhoneticPreview(QWidget *parent) : QWidget(parent)
     connectSignals();
 }
 
+void PhoneticPreview::setChineseChars(const QList<QPair<QString, QString> > &hzpy)
+{
+    if(m_preview != nullptr)
+    {
+        m_preview->setChinesePhoneticNotation(hzpy);
+    }
+}
+
+void PhoneticPreview::setCurrentHZPY(const QList<QPair<QString, QString> > &hzpy)
+{
+    if(m_preview != nullptr)
+    {
+        QString str = getStringFromHZPY(hzpy);
+        m_textEdit->setText(str);
+        m_preview->setChinesePhoneticNotation(hzpy);
+    }
+}
+
+QString PhoneticPreview::getStringFromHZPY(const QList<QPair<QString, QString> > &hzpy)
+{
+    QString str;
+
+    if(hzpy.count()>0)
+    {
+        for(QPair<QString,QString> i : hzpy)
+        {
+            str += i.second;
+        }
+    }
+
+    return str;
+}
+
 void PhoneticPreview::connectSignals()
 {
     connect(m_clear,&QPushButton::clicked,[=]()
@@ -41,6 +74,16 @@ void PhoneticPreview::connectSignals()
         {
             emit sigEdit(m_preview->getHZPY());
         }
+    });
+
+    connect(m_textEdit, &QTextEdit::textChanged,[=]()
+    {
+        this->updateBtnState();
+    });
+
+    connect(m_preview, &PhoneticTextEdit::textChanged,[=]()
+    {
+        this->updateBtnState();
     });
 }
 
@@ -88,4 +131,20 @@ void PhoneticPreview::initUI()
     layout->addLayout(layout2);
     layout->addLayout(layout3);
     this->setLayout(layout);
+
+    updateBtnState();
+}
+
+
+void PhoneticPreview::updateBtnState()
+{
+    bool phoneticState = m_textEdit->toPlainText().count()>0;
+    bool editState = m_preview->getHZPY().count()>0;
+    bool clearState = phoneticState;
+    bool insertState = editState;
+
+    m_phonetic->setEnabled(phoneticState);
+    m_clear->setEnabled(clearState);
+    m_edit->setEnabled(editState);
+    m_insert->setEnabled(insertState);
 }

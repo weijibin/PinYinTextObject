@@ -25,6 +25,8 @@ private:
 private slots:
     void on_test_clicked();
 
+    void on_edit_clicked();
+
 private:
     Ui::Widget *ui;
 
