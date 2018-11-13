@@ -28,8 +28,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         widget.cpp \
-    chinesecharacterobject.cpp \
-    svgobject.cpp \
     UIDialog/phoneticdialog.cpp \
     UIDialog/phoneticpreview.cpp \
     UIDialog/phoneticedit.cpp \
@@ -39,8 +37,6 @@ SOURCES += \
 
 HEADERS += \
         widget.h \
-    chinesecharacterobject.h \
-    svgobject.h \
     UIDialog/phoneticdialog.h \
     UIDialog/phoneticpreview.h \
     UIDialog/phoneticedit.h \

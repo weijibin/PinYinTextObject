@@ -15,35 +15,11 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QTextEdit" name="textEdit_Source"/>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="test">
-       <property name="text">
-        <string>test</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Text">
-       <property name="text">
-        <string>Text</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Svg">
-       <property name="text">
-        <string>Svg</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QTextEdit" name="textEdit"/>
+    <widget class="QPushButton" name="test">
+     <property name="text">
+      <string>test</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -17,7 +17,7 @@ void PhoneticTitle::initUI()
     setFixedHeight(fixHeight);
 
     m_title = new QPushButton;
-    m_title->setText("title");
+    m_title->setText("注音");
     m_title->setFixedWidth(50);
     m_title->setFixedHeight(fixHeight);
 

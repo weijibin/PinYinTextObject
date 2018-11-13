@@ -15,11 +15,15 @@ public:
     explicit PhoneticPreview(QWidget *parent = nullptr);
 
 signals:
-
+    void sigInsert(const QList<QPair<QString,QString>> & hzpy);
+    void sigEdit(const QList<QPair<QString,QString>> & hzpy);
 public slots:
+
+private slots:
 
 private:
     void initUI();
+    void connectSignals();
 
 private:
     QPushButton * m_clear = nullptr;

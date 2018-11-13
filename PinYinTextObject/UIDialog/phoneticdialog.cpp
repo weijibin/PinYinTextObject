@@ -5,6 +5,7 @@
 #include "phonetictitle.h"
 
 #include <QVBoxLayout>
+#include <QFile>
 
 PhoneticDialog::PhoneticDialog(QWidget *parent) : QDialog(parent)
 {
@@ -24,6 +25,13 @@ void PhoneticDialog::initUI()
     layout->addLayout(m_stackLayout);
     this->setLayout(layout);
     this->setContentsMargins(0,0,0,0);
+
+    QFile file(":/UIDialog/style.qss");
+    if(file.open(QFile::ReadOnly))
+    {
+        setStyleSheet(file.readAll());
+        file.close();
+    }
 }
 
 void PhoneticDialog::initTitle()
@@ -38,5 +46,19 @@ void PhoneticDialog::initBody()
     m_stackLayout = new QStackedLayout;
     m_stackLayout->addWidget(m_preview);
     m_stackLayout->addWidget(m_edit);
-    m_stackLayout->setCurrentIndex(1);
+//    m_stackLayout->setCurrentIndex(1);
+
+    connectSignals();
 }
+
+void PhoneticDialog::connectSignals()
+{
+    connect(m_preview,&PhoneticPreview::sigInsert,this,&PhoneticDialog::sltInsert);
+}
+
+void PhoneticDialog::sltInsert(const QList<QPair<QString, QString> > &hzpy)
+{
+    emit sigInsert(hzpy);
+    close();
+}
+

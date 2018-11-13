@@ -9,17 +9,58 @@
 PhoneticPreview::PhoneticPreview(QWidget *parent) : QWidget(parent)
 {
     initUI();
+    connectSignals();
+}
+
+void PhoneticPreview::connectSignals()
+{
+    connect(m_clear,&QPushButton::clicked,[=]()
+    {
+        m_textEdit->clear();
+    });
+
+    connect(m_insert,&QPushButton::clicked,[=]()
+    {
+        if(m_preview->getHZPY().count()>1)
+        {
+            emit sigInsert(m_preview->getHZPY());
+        }
+    });
+
+    connect(m_phonetic,&QPushButton::clicked,[=]()
+    {
+        if(m_textEdit->toPlainText()>1)
+        {
+            m_preview->setChineseString(m_textEdit->toPlainText());
+        }
+    });
+
+    connect(m_edit,&QPushButton::clicked,[=]()
+    {
+        if(m_preview->getHZPY().count()>1)
+        {
+            emit sigEdit(m_preview->getHZPY());
+        }
+    });
 }
 
 void PhoneticPreview::initUI()
 {
     m_clear = new QPushButton;
+    m_clear->setText("清除");
     m_phonetic = new QPushButton;
+    m_phonetic->setText("注音");
     m_edit = new QPushButton;
+    m_edit->setText("编辑");
     m_insert = new QPushButton;
+    m_insert->setText("插入白板");
 
     m_textEdit = new QTextEdit;
     m_preview = new PhoneticTextEdit;
+
+    m_textEdit->setLineWrapMode(QTextEdit::NoWrap);
+    m_textEdit->setPlaceholderText("Please input the Chinese Characters..........");
+    m_textEdit->document()->setDefaultFont(QFont("KaiTi",15));
 
     QVBoxLayout * layout = new QVBoxLayout;
     QHBoxLayout * layout1 = new QHBoxLayout;

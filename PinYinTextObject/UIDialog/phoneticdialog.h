@@ -14,9 +14,15 @@ public:
     PhoneticDialog(QWidget *parent = nullptr);
 
     void initUI();
+
+signals:
+    void sigInsert(const QList<QPair<QString,QString>> & hzpy);
+private slots:
+    void sltInsert(const QList<QPair<QString,QString>> & hzpy);
 private:
     void initTitle();
     void initBody();
+    void connectSignals();
 
 private:
     PhoneticPreview * m_preview = nullptr;
