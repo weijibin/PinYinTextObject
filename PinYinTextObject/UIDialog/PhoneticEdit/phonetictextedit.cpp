@@ -75,7 +75,7 @@ QList<int> PhoneticTextEdit::getSelectedHZPY() const
             {
 //                pinyin.append(QPair<QString,QString>(str,str1));
                 lst.append(i);
-                qDebug()<<"i::"<<"str::"<<str<<"===="<<str1;
+//                qDebug()<<"i::"<<"str::"<<str<<"===="<<str1;
             }
         }
 //       qDebug()<<"end";

@@ -16,8 +16,9 @@ signals:
 public slots:
 
 protected:
-    void mousePressEvent(QMouseEvent*) override;
-    void mouseMoveEvent(QMouseEvent *) override;
+    virtual void mousePressEvent(QMouseEvent*) override;
+    virtual void mouseMoveEvent(QMouseEvent *) override;
+    virtual void paintEvent(QPaintEvent *event) override;
 
 private:
     void initUI();

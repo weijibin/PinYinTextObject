@@ -6,6 +6,8 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QDebug>
+#include <QStyleOption>
+#include <QPainter>
 #include "PhoneticEdit/phonetictextedit.h"
 #include "PhoneticTableView/phoneticview.h"
 
@@ -13,6 +15,7 @@ PhoneticEdit::PhoneticEdit(QWidget *parent) : QWidget(parent)
 {
     initUI();
     connectSignals();
+    setObjectName("phoneticEdit");
 }
 
 void PhoneticEdit::setChineseChars(const QList<QPair<QString, QString> > &hzpy)
@@ -42,6 +45,15 @@ void PhoneticEdit::initUI()
 
     m_save->setFixedSize(100,30);
     m_cancel->setFixedSize(100,30);
+
+    {
+        m_change->setObjectName("changeBtn");
+        m_default->setObjectName("defaultBtn");
+        m_clear->setObjectName("clearBtn");
+
+        m_save->setObjectName("saveBtn");
+        m_cancel->setObjectName("cancelBtn");
+    }
 
     m_phonetic = new PhoneticTextEdit;
     m_phonetic->setFixedHeight(190);
@@ -134,4 +146,12 @@ void PhoneticEdit::updateBtnState()
     m_clear->setEnabled(clearState);
     m_save->setEnabled(saveState);
     m_cancel->setEnabled(cancelState);
+}
+
+void PhoneticEdit::paintEvent(QPaintEvent* )
+{
+    QStyleOption opt;
+    opt.init(this);
+    QPainter p(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }

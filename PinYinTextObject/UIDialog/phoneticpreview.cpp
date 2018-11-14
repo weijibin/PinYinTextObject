@@ -4,12 +4,15 @@
 #include <QTextEdit>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QStyleOption>
+#include <QPainter>
 #include "PhoneticEdit/phonetictextedit.h"
 
 PhoneticPreview::PhoneticPreview(QWidget *parent) : QWidget(parent)
 {
     initUI();
     connectSignals();
+    setObjectName("phoneticPreview");
 }
 
 void PhoneticPreview::setChineseChars(const QList<QPair<QString, QString> > &hzpy)
@@ -104,6 +107,13 @@ void PhoneticPreview::initUI()
     m_insert->setText("插入白板");
     m_insert->setFixedSize(100,30);
 
+    {
+        m_phonetic->setObjectName("phoneticBtn");
+        m_edit->setObjectName("preDefaultBtn");
+        m_clear->setObjectName("preClearBtn");
+        m_insert->setObjectName("insertBtn");
+    }
+
     m_textEdit = new QTextEdit;
     m_preview = new PhoneticTextEdit;
 
@@ -158,4 +168,12 @@ void PhoneticPreview::updateBtnState()
     m_clear->setEnabled(clearState);
     m_edit->setEnabled(editState);
     m_insert->setEnabled(insertState);
+}
+
+void PhoneticPreview::paintEvent(QPaintEvent* )
+{
+    QStyleOption opt;
+    opt.init(this);
+    QPainter p(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }

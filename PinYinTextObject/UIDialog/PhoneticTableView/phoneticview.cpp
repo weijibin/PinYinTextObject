@@ -14,6 +14,7 @@ PhoneticView::PhoneticView(QWidget *parent) : QTableView(parent)
 
     setColumnWidth(0,250);
     setColumnWidth(1,250);
+    setShowGrid(false);
 }
 
 void PhoneticView::initData(const QList<int> indexs, const QList<QPair<QString, QString> > datas)

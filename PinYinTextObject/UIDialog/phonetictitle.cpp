@@ -2,6 +2,8 @@
 #include <QLabel>
 #include <QMouseEvent>
 #include <QHBoxLayout>
+#include <QStyleOption>
+#include <QPainter>
 
 PhoneticTitle::PhoneticTitle(QWidget *parent) : QWidget(parent)
 {
@@ -22,16 +24,19 @@ void PhoneticTitle::initUI()
     m_title->setFixedHeight(fixHeight);
 
     m_helper = new QPushButton;
-    m_helper->setText("helper");
-    m_helper->setFixedWidth(fixHeight);
-    m_helper->setFixedHeight(fixHeight);
+    m_helper->setFixedWidth(fixHeight/2);
+    m_helper->setFixedHeight(fixHeight/2);
     m_label = new QLabel;
-    m_label->setText("Phonetic Title");
     m_label->setFixedHeight(fixHeight);
     m_close = new QPushButton;
-    m_close->setText("close");
     m_close->setFixedWidth(fixHeight);
     m_close->setFixedHeight(fixHeight);
+
+    {
+        m_title->setObjectName("titleBtn");
+        m_helper->setObjectName("helperBtn");
+        m_close->setObjectName("closeBtn");
+    }
 
     QHBoxLayout * layout = new QHBoxLayout(this);
     layout->addWidget(m_title);
@@ -52,6 +57,13 @@ void PhoneticTitle::initUI()
     {
         m_pTopParent = (QWidget*) m_pTopParent->parent();
     }
+
+//    {
+//        this->setStyleSheet("QPushButton#helperBtn {\
+//                            border-image: url(:/UIDialog/Resource/helper.png);\
+//                            }");
+//    }
+
 }
 
 void PhoneticTitle::connetSignals()
@@ -75,3 +87,10 @@ void PhoneticTitle::mouseMoveEvent(QMouseEvent *e)
     }
 }
 
+void PhoneticTitle::paintEvent(QPaintEvent* )
+{
+    QStyleOption opt;
+    opt.init(this);
+    QPainter p(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+}

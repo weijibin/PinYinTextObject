@@ -3,5 +3,11 @@
         <file>heart.svg</file>
         <file>leaf.svg</file>
         <file>word.pyd</file>
+        <file>UIDialog/Resource/close.png</file>
+        <file>UIDialog/Resource/close_press.png</file>
+        <file>UIDialog/Resource/helper.png</file>
+        <file>UIDialog/Resource/close_hover.png</file>
+        <file>UIDialog/Resource/helper_press.png</file>
+        <file>UIDialog/style.qss</file>
     </qresource>
 </RCC>

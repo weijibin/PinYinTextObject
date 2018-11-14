@@ -22,6 +22,9 @@ signals:
     void sigEdit(const QList<QPair<QString,QString>> & hzpy);
 public slots:
 
+protected:
+    virtual void paintEvent(QPaintEvent *event) override;
+
 private slots:
 
 private:

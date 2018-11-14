@@ -6,6 +6,7 @@
 
 #include <QVBoxLayout>
 #include <QFile>
+#include <QDebug>
 
 PhoneticDialog::PhoneticDialog(QWidget *parent) : QDialog(parent)
 {

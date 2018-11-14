@@ -1,0 +1,262 @@
+QPushButton#helperBtn{
+    border-image: url(:/UIDialog/Resource/helper.png);
+}
+QPushButton#titleBtn{
+    border-style:none;
+    font-family:'微软雅黑';
+    font-size:16px;
+}
+
+QPushButton#closeBtn{
+    border-image: url(:/UIDialog/Resource/close.png);
+}
+QPushButton#closeBtn:hover{
+    border-image: url(:/UIDialog/Resource/close_hover.png);
+}
+QPushButton#closeBtn:pressed{
+    border-image: url(:/UIDialog/Resource/close_press.png);
+}
+
+PhoneticPreview QPushButton{
+    color: #333333;
+    background-color:#ffffff;
+    border: 1px  solid;
+    border-color: #cccccc;
+    border-radius: 2px;
+}
+PhoneticPreview QPushButton:pressed{
+    color: #333333;
+    background-color:#ededed;
+    border: 1px  solid;
+    border-color: #cccccc;
+    border-radius: 2px;
+}
+PhoneticPreview QPushButton:hover{
+    color: #333333;
+    background-color:#ededed;
+    border: 1px  solid;
+    border-color: #cccccc;
+    border-radius: 2px;
+}
+PhoneticPreview QPushButton:disabled{
+    color: #b4b4b4;
+    background-color:#ffffff;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+
+PhoneticEdit QPushButton{
+    color: #333333;
+    background-color:#ffffff;
+    border: 1px  solid;
+    border-color: #cccccc;
+    border-radius: 2px;
+}
+PhoneticEdit QPushButton:pressed{
+    color: #333333;
+    background-color:#ededed;
+    border: 1px  solid;
+    border-color: #cccccc;
+    border-radius: 2px;
+}
+PhoneticEdit QPushButton:hover{
+    color: #333333;
+    background-color:#ededed;
+    border: 1px  solid;
+    border-color: #cccccc;
+    border-radius: 2px;
+}
+PhoneticEdit QPushButton:disabled{
+    color: #b4b4b4;
+    background-color:#ffffff;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+    font-family:'微软雅黑';
+}
+
+QPushButton#insertBtn{
+    color: #f7f7f7;
+    background-color:#00b266;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+QPushButton#insertBtn:pressed{
+    color: #f7f7f7;
+    background-color:#009f5b;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+QPushButton#insertBtn:hover{
+    color: #f7f7f7;
+    background-color:#009f5b;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+QPushButton#insertBtn:disabled{
+    color: #f7f7f7;
+    background-color:#99e0c1;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+
+QPushButton#cancelBtn{
+    color: #f7f7f7;
+    background-color:#00b266;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+QPushButton#cancelBtn:pressed{
+    color: #f7f7f7;
+    background-color:#009f5b;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+QPushButton#cancelBtn:hover{
+    color: #f7f7f7;
+    background-color:#009f5b;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+QPushButton#cancelBtn:disabled{
+    color: #f7f7f7;
+    background-color:#99e0c1;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+
+QPushButton#saveBtn{
+    color: #f7f7f7;
+    background-color:#00b266;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+QPushButton#saveBtn:pressed{
+    color: #f7f7f7;
+    background-color:#009f5b;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+QPushButton#saveBtn:hover{
+    color: #f7f7f7;
+    background-color:#009f5b;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+QPushButton#saveBtn:disabled{
+    color: #f7f7f7;
+    background-color:#99e0c1;
+    border: 1px  solid;
+    border-color: #e5e5e5;
+    border-radius: 2px;
+}
+
+QWidget#phonetictitle{
+    background-color: #f7f7f7
+}
+
+QWidget#phoneticEdit{
+    background-color: #eeeeee
+}
+
+QWidget#phoneticPreview{
+    background-color: #eeeeee
+}
+
+QScrollBar:vertical{
+    width:10px;
+    background-color:#F2F3F9;
+    margin:0px,0px,0px,0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-right:2px;
+ }
+ QScrollBar::handle:vertical{
+    border-radius: 4px;
+    width:8px;
+    background: rgb(0, 0, 0, 20);
+    min-height:20px;
+ }
+ QScrollBar::handle:vertical:hover{
+    border-radius: 4px;
+    width:8px;
+    background:rgb(0, 0, 0, 30);
+    min-height:20px;
+    }
+ QScrollBar::handle:vertical:pressed{
+    border-radius: 4px;
+    width:8px;
+    background:rgb(0, 0, 0, 40);
+    min-height:20px;
+    }
+QScrollBar::sub-line:vertical, QScrollBar::add-line:vertical
+ {
+    width: 0px;height: 0px;
+ }
+ QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical
+ {
+    background: #F2F3F9;
+ }
+
+QScrollBar:horizontal{
+    height:10px;
+    background-color:#F2F3F9;
+    margin:0px,0px,0px,0px;
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-right:2px;
+ }
+ QScrollBar::handle:horizontal{
+    border-radius: 4px;
+    height:8px;
+    background: rgb(0, 0, 0, 20);
+    min-width:20px;
+ }
+ QScrollBar::handle:horizontal:hover{
+    border-radius: 4px;
+    height:8px;
+    background:rgb(0, 0, 0, 30);
+    min-width:20px;
+    }
+ QScrollBar::handle:horizontal:pressed{
+    border-radius: 4px;
+    height:8px;
+    background:rgb(0, 0, 0, 40);
+    min-width:20px;
+    }
+QScrollBar::sub-line:horizontal, QScrollBar::add-line:horizontal
+ {
+    width: 0px;height: 0px;
+ }
+ QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal
+ {
+    background: #F2F3F9;
+ }
+
+QTextEdit {
+      border: 0px solid gray;
+      padding: 0 8px;
+      background: #f7f7f7;
+      selection-background-color: #1479e6;
+  }
+
+QTableView{
+        background: #f7f7f7;
+        border:0px solid transparent;
+        selection-color: rgb(140,175,200);
+        selection-background-color: rgba(0,165,220,51);;
+        font: 14px "Microsoft YaHei";
+        color: #333333;
+}
