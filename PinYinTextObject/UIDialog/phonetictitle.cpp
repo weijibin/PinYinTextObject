@@ -45,6 +45,8 @@ void PhoneticTitle::initUI()
 
     this->setContentsMargins(0,0,0,0);
 
+    this->setFixedHeight(fixHeight);
+
     m_pTopParent = this;
     if(m_pTopParent->parent())
     {

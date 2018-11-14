@@ -95,8 +95,14 @@ void PhoneticPreview::initUI()
     m_phonetic->setText("注音");
     m_edit = new QPushButton;
     m_edit->setText("编辑");
+
+    m_clear->setFixedSize(60,24);
+    m_phonetic->setFixedSize(60,24);
+    m_edit->setFixedSize(60,24);
+
     m_insert = new QPushButton;
     m_insert->setText("插入白板");
+    m_insert->setFixedSize(100,30);
 
     m_textEdit = new QTextEdit;
     m_preview = new PhoneticTextEdit;
@@ -114,6 +120,7 @@ void PhoneticPreview::initUI()
     QVBoxLayout *layout11 = new QVBoxLayout;
     layout11->addWidget(m_phonetic);
     layout11->addWidget(m_clear);
+    layout11->setContentsMargins(20,0,20,0);
     layout1->addLayout(layout11);
 
 
@@ -122,16 +129,20 @@ void PhoneticPreview::initUI()
     layout21->addStretch();
     layout21->addWidget(m_edit);
     layout21->addStretch();
+    layout21->setContentsMargins(20,0,20,0);
     layout2->addLayout(layout21);
 
     layout3->addStretch();
     layout3->addWidget(m_insert);
+    layout3->addSpacing(20);
 
     layout->addLayout(layout1);
     layout->addLayout(layout2);
     layout->addLayout(layout3);
+    layout->setContentsMargins(0,0,0,0);
     this->setLayout(layout);
 
+    this->setContentsMargins(20,0,0,12);
     updateBtnState();
 }
 
