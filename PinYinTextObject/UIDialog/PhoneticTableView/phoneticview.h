@@ -4,6 +4,7 @@
 #include <QTableView>
 
 class PhoneticModel;
+class PhoneticDelegate;
 
 class PhoneticView : public QTableView
 {
@@ -20,6 +21,7 @@ signals:
 
 private:
     PhoneticModel * m_model = nullptr;
+    PhoneticDelegate * m_delegate = nullptr;
 };
 
 #endif // PHONETICVIEW_H

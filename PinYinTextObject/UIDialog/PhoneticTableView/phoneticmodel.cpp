@@ -33,6 +33,18 @@ QVariant PhoneticModel::data(const QModelIndex &index, int role) const
         }
         return info;
     }
+    if(role == Qt::UserRole)
+    {
+        int row = index.row();
+        int col = index.column();
+        QString info = "";
+        int pos = m_phoneticIndex.at(row);
+        if(col == 1)
+        {
+            info = m_phoneticData.at(pos).second;
+        }
+        return info;
+    }
     return QVariant();
 }
 
@@ -55,13 +67,40 @@ bool PhoneticModel::setData(const QModelIndex &index, const QVariant &value, int
 
 Qt::ItemFlags PhoneticModel::flags(const QModelIndex &index) const
 {
-     return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+    if(index.column() ==1)
+        return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+    else
+        return QAbstractTableModel::flags(index);
+}
+
+QVariant PhoneticModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+
+    if (role == Qt::DisplayRole && orientation == Qt::Horizontal)
+    {
+        QVariant var;
+        if(section == 0)
+        {
+            var = "汉字";
+        }
+        else
+        {
+            var = "拼音";
+        }
+        return var;
+    }
+    else
+    {
+            return QAbstractTableModel::headerData(section, orientation, role);
+    }
 }
 
 void PhoneticModel::setPhoneticData(const QList<int> &indexs, const QList<QPair<QString, QString>> &data)
 {
+    this->beginResetModel();
     m_phoneticIndex = indexs;
     m_phoneticData = data;
+    this->endResetModel();
 }
 
 const QList<QPair<QString,QString>>& PhoneticModel::getPhoneticData()

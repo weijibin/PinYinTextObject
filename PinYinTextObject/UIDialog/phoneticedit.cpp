@@ -87,10 +87,12 @@ void PhoneticEdit::connectSignals()
     connect(m_change,&QPushButton::clicked,[=]()
     {
         QList<int> lst = m_phonetic->getSelectedHZPY();
-        m_edit->initData(lst, m_phonetic->getHZPY());
-
-        m_isHaveChanged = true;
-        updateBtnState();
+        if(lst.count()>0)
+        {
+            m_edit->initData(lst, m_phonetic->getHZPY());
+            m_isHaveChanged = true;
+            updateBtnState();
+        }
     });
 
     connect(m_phonetic,&PhoneticTextEdit::textChanged,[=]()
