@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QDebug>
 #include "PhoneticEdit/phonetictextedit.h"
+#include "PhoneticTableView/phoneticview.h"
 
 PhoneticEdit::PhoneticEdit(QWidget *parent) : QWidget(parent)
 {
@@ -38,7 +39,7 @@ void PhoneticEdit::initUI()
     m_phonetic = new PhoneticTextEdit;
     m_phonetic->setFixedHeight(190);
 
-    m_edit = new QWidget;
+    m_edit = new PhoneticView;
     m_edit->setFixedHeight(192);
 
     QVBoxLayout * layout = new QVBoxLayout;
@@ -55,7 +56,7 @@ void PhoneticEdit::initUI()
     layout1->addLayout(layout11);
 
     layout2->addWidget(m_edit);
-    layout2->addStretch();
+//    layout2->addStretch();
     QVBoxLayout * layout21 = new QVBoxLayout;
     layout21->addWidget(m_default);
     layout21->addWidget(m_clear);
@@ -75,7 +76,7 @@ void PhoneticEdit::connectSignals()
 {
     connect(m_save,&QPushButton::clicked,[=]()
     {
-        emit sigSave(m_phonetic->getHZPY());
+        emit sigSave(m_edit->getPhoneticData());
     });
 
     connect(m_cancel,&QPushButton::clicked,[=]()
@@ -86,7 +87,7 @@ void PhoneticEdit::connectSignals()
     connect(m_change,&QPushButton::clicked,[=]()
     {
         QList<int> lst = m_phonetic->getSelectedHZPY();
-        qDebug()<<lst;
+        m_edit->initData(lst, m_phonetic->getHZPY());
     });
 
     connect(m_phonetic,&PhoneticTextEdit::textChanged,[=]()
@@ -98,9 +99,7 @@ void PhoneticEdit::connectSignals()
     {
         updateBtnState();
     });
-
 }
-
 
 void PhoneticEdit::updateBtnState()
 {

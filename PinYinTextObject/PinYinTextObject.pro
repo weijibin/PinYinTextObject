@@ -33,7 +33,10 @@ SOURCES += \
     UIDialog/phoneticedit.cpp \
     UIDialog/phonetictitle.cpp \
     UIDialog/PhoneticEdit/chinesecharacterobject.cpp \
-    UIDialog/PhoneticEdit/phonetictextedit.cpp
+    UIDialog/PhoneticEdit/phonetictextedit.cpp \
+    UIDialog/PhoneticTableView/phoneticmodel.cpp \
+    UIDialog/PhoneticTableView/phoneticdelegate.cpp \
+    UIDialog/PhoneticTableView/phoneticview.cpp
 
 HEADERS += \
         widget.h \
@@ -42,7 +45,10 @@ HEADERS += \
     UIDialog/phoneticedit.h \
     UIDialog/phonetictitle.h \
     UIDialog/PhoneticEdit/chinesecharacterobject.h \
-    UIDialog/PhoneticEdit/phonetictextedit.h
+    UIDialog/PhoneticEdit/phonetictextedit.h \
+    UIDialog/PhoneticTableView/phoneticmodel.h \
+    UIDialog/PhoneticTableView/phoneticdelegate.h \
+    UIDialog/PhoneticTableView/phoneticview.h
 
 FORMS += \
         widget.ui

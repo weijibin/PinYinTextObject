@@ -5,6 +5,7 @@
 class QPushButton;
 class QWidget;
 class PhoneticTextEdit;
+class PhoneticView;
 
 class PhoneticEdit : public QWidget
 {
@@ -34,7 +35,7 @@ private:
     QPushButton * m_cancel = nullptr;
 
     PhoneticTextEdit * m_phonetic = nullptr;
-    QWidget *  m_edit = nullptr;
+    PhoneticView * m_edit = nullptr;
 };
 
 #endif // PHONETICEDIT_H
