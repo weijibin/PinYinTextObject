@@ -36,6 +36,8 @@ private:
 
     PhoneticTextEdit * m_phonetic = nullptr;
     PhoneticView * m_edit = nullptr;
+
+    bool m_isHaveChanged = false;
 };
 
 #endif // PHONETICEDIT_H

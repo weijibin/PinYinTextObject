@@ -4,6 +4,12 @@
 PhoneticView::PhoneticView(QWidget *parent) : QTableView(parent)
 {
     m_model = new PhoneticModel(this);
+
+//    connect(m_model,&PhoneticModel::dataChanged,[=](const QModelIndex &topLeft, const QModelIndex &bottomRight,
+//            const QVector<int> &roles)
+//    {
+//        emit sigDataChanged();
+//    });
 }
 
 void PhoneticView::initData(const QList<int> indexs, const QList<QPair<QString, QString> > datas)

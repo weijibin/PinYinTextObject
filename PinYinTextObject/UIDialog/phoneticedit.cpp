@@ -88,6 +88,9 @@ void PhoneticEdit::connectSignals()
     {
         QList<int> lst = m_phonetic->getSelectedHZPY();
         m_edit->initData(lst, m_phonetic->getHZPY());
+
+        m_isHaveChanged = true;
+        updateBtnState();
     });
 
     connect(m_phonetic,&PhoneticTextEdit::textChanged,[=]()
@@ -104,8 +107,9 @@ void PhoneticEdit::connectSignals()
 void PhoneticEdit::updateBtnState()
 {
     bool changeState = m_phonetic->textCursor().hasSelection();
-    bool defaultState = true;
-    bool clearState = true;
+
+    bool defaultState = m_isHaveChanged;
+    bool clearState = m_isHaveChanged;
 
     bool saveState = true;
     bool cancelState = true;

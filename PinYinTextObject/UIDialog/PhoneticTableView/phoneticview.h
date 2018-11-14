@@ -15,6 +15,9 @@ public:
 
     const QList<QPair<QString,QString>>& getPhoneticData();
 
+signals:
+    void sigDataChanged();
+
 private:
     PhoneticModel * m_model = nullptr;
 };
