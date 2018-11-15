@@ -9,5 +9,6 @@
         <file>UIDialog/Resource/close_hover.png</file>
         <file>UIDialog/Resource/helper_press.png</file>
         <file>UIDialog/style.qss</file>
+        <file>UIDialog/Resource/segment.png</file>
     </qresource>
 </RCC>

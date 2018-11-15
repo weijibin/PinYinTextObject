@@ -1,6 +1,9 @@
 QPushButton#helperBtn{
     border-image: url(:/UIDialog/Resource/helper.png);
 }
+QPushButton#helperBtn:pressed{
+    border-image: url(:/UIDialog/Resource/helper_press.png);
+}
 QPushButton#titleBtn{
     border-style:none;
     font-family:'微软雅黑';
@@ -163,16 +166,24 @@ QPushButton#saveBtn:disabled{
     border-radius: 2px;
 }
 
-QWidget#phonetictitle{
-    background-color: #f7f7f7
+QPushButton#segment1,#segment2,#segment3,#segment4{
+    border-image: url(:/UIDialog/Resource/segment.png);
 }
 
-QWidget#phoneticEdit{
+QWidget#phonetictitle,#changeWidget,#previewWidget{
+    background-color: #f7f7f7;
+    border: none;
+    border-bottom: 1px solid #99777777;
+}
+
+QWidget#phoneticPreview,#phoneticEdit{
     background-color: #eeeeee
 }
 
-QWidget#phoneticPreview{
-    background-color: #eeeeee
+QWidget#inputWidget,#viewWidget{
+    background-color: #ffffff;
+    border: none;
+    border-bottom: 1px solid #99777777;
 }
 
 QScrollBar:vertical{
@@ -245,16 +256,23 @@ QScrollBar::sub-line:horizontal, QScrollBar::add-line:horizontal
     background: #F2F3F9;
  }
 
-QTextEdit {
-      border: 0px solid gray;
+QTextEdit#preTextEdit {
+      border:0px solid gray;
+      padding: 0 8px;
+      background: #ffffff;
+      selection-background-color: #1479e6;
+  }
+
+QTextEdit#prePhonetic,#changePhonetic {
+      border:0px solid gray;
       padding: 0 8px;
       background: #f7f7f7;
       selection-background-color: #1479e6;
   }
 
 QTableView{
-        background: #f7f7f7;
-        border:0px solid transparent;
+        background: #ffffff;
+        border:0px solid gray;
         selection-color: rgb(140,175,200);
         selection-background-color: rgba(0,165,220,51);;
         font: 14px "Microsoft YaHei";

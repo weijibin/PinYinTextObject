@@ -57,13 +57,6 @@ void PhoneticTitle::initUI()
     {
         m_pTopParent = (QWidget*) m_pTopParent->parent();
     }
-
-//    {
-//        this->setStyleSheet("QPushButton#helperBtn {\
-//                            border-image: url(:/UIDialog/Resource/helper.png);\
-//                            }");
-//    }
-
 }
 
 void PhoneticTitle::connetSignals()

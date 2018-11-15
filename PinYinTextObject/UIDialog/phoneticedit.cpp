@@ -46,6 +46,12 @@ void PhoneticEdit::initUI()
     m_save->setFixedSize(100,30);
     m_cancel->setFixedSize(100,30);
 
+    m_phonetic = new PhoneticTextEdit;
+    m_phonetic->setFixedHeight(190);
+
+    m_edit = new PhoneticView;
+    m_edit->setFixedHeight(192);
+
     {
         m_change->setObjectName("changeBtn");
         m_default->setObjectName("defaultBtn");
@@ -53,13 +59,9 @@ void PhoneticEdit::initUI()
 
         m_save->setObjectName("saveBtn");
         m_cancel->setObjectName("cancelBtn");
+
+        m_phonetic->setObjectName("changePhonetic");
     }
-
-    m_phonetic = new PhoneticTextEdit;
-    m_phonetic->setFixedHeight(190);
-
-    m_edit = new PhoneticView;
-    m_edit->setFixedHeight(192);
 
     QVBoxLayout * layout = new QVBoxLayout;
 
@@ -68,33 +70,63 @@ void PhoneticEdit::initUI()
     QHBoxLayout * layout3 = new QHBoxLayout;
 
     layout1->addWidget(m_phonetic);
+
+    QPushButton * btn3 = new QPushButton;
+    btn3->setObjectName("segment3");
+    btn3->setFixedWidth(2);
+    btn3->setFixedHeight(190);
+    btn3->setEnabled(false);
+    layout1->addWidget(btn3);
+
     QVBoxLayout * layout11 = new QVBoxLayout;
     layout11->addStretch();
     layout11->addWidget(m_change);
     layout11->addStretch();
-    layout11->setContentsMargins(20,0,20,0);
     layout1->addLayout(layout11);
 
+    QWidget * w1 = new QWidget(this);
+    w1->setObjectName("changeWidget");
+    w1->setLayout(layout1);
+    w1->setContentsMargins(20,0,0,0);
+    layout1->setContentsMargins(0,0,0,0);
+    layout11->setContentsMargins(20,0,20,0);
+
+
     layout2->addWidget(m_edit);
-//    layout2->addStretch();
+
+    QPushButton * btn4 = new QPushButton;
+    btn4->setObjectName("segment4");
+    btn4->setFixedWidth(2);
+    btn4->setFixedHeight(190);
+    btn4->setEnabled(false);
+    layout2->addWidget(btn4);
+
     QVBoxLayout * layout21 = new QVBoxLayout;
     layout21->addWidget(m_default);
     layout21->addWidget(m_clear);
-    layout21->setContentsMargins(20,0,20,0);
     layout2->addLayout(layout21);
+
+    QWidget * w2 = new QWidget(this);
+    w2->setObjectName("viewWidget");
+    w2->setLayout(layout2);
+    w2->setContentsMargins(20,0,0,0);
+    layout2->setContentsMargins(0,0,0,0);
+    layout21->setContentsMargins(20,0,20,0);
 
     layout3->addStretch();
     layout3->addWidget(m_save);
     layout3->addWidget(m_cancel);
     layout3->addSpacing(20);
+    layout3->setContentsMargins(0,10,0,10);
 
-    layout->addLayout(layout1);
-    layout->addLayout(layout2);
+    layout->addWidget(w1);
+    layout->addWidget(w2);
     layout->addLayout(layout3);
-    layout->setContentsMargins(0,0,0,0);
     this->setLayout(layout);
 
-    this->setContentsMargins(20,0,0,12);
+    layout->setSpacing(0);
+    layout->setContentsMargins(0,0,0,0);
+    this->setContentsMargins(0,0,0,0);
 }
 
 void PhoneticEdit::connectSignals()
